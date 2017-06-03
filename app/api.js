@@ -1,11 +1,11 @@
 var request=require('request');
 
-
+//exporting the module.
 module.exports=function(router)
 {
 	var pokedex=[];
 
-	//fetching all pokemon details using request npm package.
+	//fetching  pokemon dataset using request npm package.
 	request.get('https://raw.githubusercontent.com/Biuni/PokemonGO-Pokedex/master/pokedex.json',function(error,res,body){
 		if(error)
 		{
@@ -20,7 +20,7 @@ module.exports=function(router)
 	router.get('/poke',function(req,res){
 		res.json(pokedex);
 	});
-
+	//route to search pokemon by name
 	router.get('/byname/:name',function(req,res){
 		var flag=false;
 		for(let i=0;i<pokedex.length;i++)
@@ -36,7 +36,7 @@ module.exports=function(router)
 			res.json({"message":"pokemon not found"});	
 		}
 	})
-
+	//route to search pokemon by type
 	router.get('/bytype/:type',function(req,res){
 
 		var pokemon=[];
@@ -60,7 +60,7 @@ module.exports=function(router)
 		}
 		
 	});
-
+	//route to search pokemon by its weakness
 	router.get('/byweakness/:weakness',function(req,res){
 
 		var pokemon=[];
@@ -85,6 +85,7 @@ module.exports=function(router)
 		
 	});
 
+	//route to list all pokemon having spawnchance less than equal togiven parameter
 	router.get('/byspawnchance_lte/:spawnchance_lte',function(req,res){
 
 		var pokemon=[];
@@ -105,7 +106,7 @@ module.exports=function(router)
 		}
 		
 	});
-
+	//route to list all pokemon having spawnchance greater than equal togiven parameter
 	router.get('/byspawnchance_gte/:spawnchance_gte',function(req,res){
 
 		var pokemon=[];
@@ -127,6 +128,7 @@ module.exports=function(router)
 		
 	});
 
+	//route to list all pokemon having avg spawn greater than equal togiven parameter
 	router.get('/byavgspawn_gte/:avgspawn_gte',function(req,res){
 
 		var pokemon=[];
@@ -148,6 +150,7 @@ module.exports=function(router)
 		
 	});
 
+	//route to list all pokemon having avg spawn less than equal togiven parameter
 	router.get('/byavgspawn_lte/:avgspawn_lte',function(req,res){
 
 		var pokemon=[];
@@ -169,5 +172,5 @@ module.exports=function(router)
 		
 	});
 
-	return router
+	return router	//returning the router to the middleware
 }

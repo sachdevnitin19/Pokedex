@@ -10,17 +10,18 @@ var port=process.env.PORT||8000;
 app.use(morgan('dev'));									//using morgan as a middleware for logging all the requests.
 app.use(bodyParser.json());								
 app.use(bodyParser.urlencoded({extended:true}));
-app.use(express.static(__dirname+'/public'));
-app.use('/api',appRoutes);
+app.use(express.static(__dirname+'/public'));			//serve only public folder contents to client side
+app.use('/api',appRoutes);								//using routes midleware.
 
 
 
 
 
-
+//if user to go to any other undefined route this will redirect to home page.
 app.get('*',function(req,res){
 	res.sendFile(path.join(__dirname+'/public/index.html'));
 });
+//start the server
 app.listen(port,function(){
 	console.log("listening on port:"+port);
 });

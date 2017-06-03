@@ -1,17 +1,21 @@
-var app=angular.module('pokedex',['toaster']);
+var app=angular.module('pokedex',['toaster']);//creating module
 
+//main controller
 app.controller('mainController',function($http,$scope,toaster){
 
 	appl=this;
-	appl.name=false;
-	appl.typ=false;
-	appl.weak=false;
-	appl.spawnchance=false;
+	appl.name=false;					//this to hide 			
+	appl.typ=false;						//different 
+	appl.weak=false;					//searchboxes
+	appl.spawnchance=false;				//
 	appl.spawnavg=false;
 	appl.pokemonlist={};
-	appl.pokemon=false;
-	appl.pokemonname=false;
-	appl.activate=function(a)
+	
+	appl.pokemon=false;					//this to hide the body 
+	appl.pokemonname=false;				//in which result is displayed when no input
+	
+	//function triggers the display of different search boxes.
+	appl.activate=function(a)			
 	{
 		if(a=='name')
 		{	
@@ -64,6 +68,7 @@ app.controller('mainController',function($http,$scope,toaster){
 			appl.spawnchance=false;
 		}
 	}
+	//this function makes http request to search pokemon by name
 	appl.searchbyname=function(parname){
 		console.log(this.parname);
 		if(this.parname=="")
@@ -89,7 +94,7 @@ app.controller('mainController',function($http,$scope,toaster){
 		
 	}
 
-
+	//this function makes http request to search pokemon by type
 	appl.searchbytype=function(parname){
 		if(this.parname=="")
 		{
@@ -113,6 +118,8 @@ app.controller('mainController',function($http,$scope,toaster){
 		}
 		
 	}
+
+	//this function makes http request to search pokemon by its weaknesses
 	appl.searchbyweak=function(parname){
 		if(this.parname=="")
 		{
@@ -135,6 +142,8 @@ app.controller('mainController',function($http,$scope,toaster){
 		}
 		
 	}
+
+	//this function makes http request to search pokemon by its spawnchances
 	appl.searchbyspawnchance=function(parname,a){
 		if(this.parname=="")
 		{
@@ -174,7 +183,7 @@ app.controller('mainController',function($http,$scope,toaster){
 		}
 		
 	}
-
+	//this function makes http request to search pokemon by avgspawn
 	appl.searchbyavgspawn=function(parname,a){
 		if(this.parname=="")
 		{
