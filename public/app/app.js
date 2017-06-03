@@ -9,10 +9,13 @@ app.controller('mainController',function($http,$scope,toaster){
 	appl.spawnchance=false;
 	appl.spawnavg=false;
 	appl.pokemonlist={};
+	appl.pokemon=false;
 	appl.activate=function(a)
 	{
 		if(a=='name')
-		{
+		{	
+			appl.pokemon=false;
+			appl.parname="";
 			appl.name=true;
 			appl.typ=false;
 			appl.weak=false;
@@ -22,6 +25,7 @@ app.controller('mainController',function($http,$scope,toaster){
 		else if(a=='typ')
 		{
 			appl.typ=true;
+			appl.parname="";
 			appl.name=false;
 			appl.weak=false;
 			appl.spawnchance=false;
@@ -30,6 +34,7 @@ app.controller('mainController',function($http,$scope,toaster){
 		else if(a=='weak')
 		{
 			appl.weak=true;
+			appl.parname="";
 			appl.name=false;
 			appl.typ=false;
 			appl.spawnchance=false;
@@ -38,6 +43,7 @@ app.controller('mainController',function($http,$scope,toaster){
 		else if(a=='spawnchance')
 		{
 			appl.spawnchance=true;
+			appl.parname="";
 			appl.name=false;
 			appl.typ=false;
 			appl.weak=false;
@@ -47,12 +53,14 @@ app.controller('mainController',function($http,$scope,toaster){
 		{
 			appl.spawnavg=true;
 			appl.name=false;
+			appl.parname="";
 			appl.typ=false;
 			appl.weak=false;
 			appl.spawnchance=false;
 		}
 	}
 	appl.searchbyname=function(parname){
+
 		if(this.parname===undefined)
 		{
 			toaster.pop('error','Please enter some input');
@@ -89,6 +97,7 @@ app.controller('mainController',function($http,$scope,toaster){
 			{	
 				console.log(data.data);
 				appl.pokemonlist=data.data;
+				appl.pokemon=true;
 			}
 			else
 			{
@@ -110,6 +119,7 @@ app.controller('mainController',function($http,$scope,toaster){
 			if(data.data.message==undefined)
 			{
 				appl.pokemonlist=data.data;
+				appl.pokemon=true;
 			}
 			else
 			{
@@ -130,7 +140,8 @@ app.controller('mainController',function($http,$scope,toaster){
 			$http.get('/api/byspawnchance_lte/'+this.parname).then(function(data){
 				if(data.data.message==undefined)
 				{
-					appl.pokemonlist=data.data;		
+					appl.pokemonlist=data.data;
+					appl.pokemon=true;		
 				}
 				else
 				{
@@ -145,10 +156,12 @@ app.controller('mainController',function($http,$scope,toaster){
 				if(data.data.message==undefined)
 				{
 					appl.pokemonlist=data.data;
+					appl.pokemon=true;
 				}
 				else
 				{
 					toaster.pop('error',data.data.message);
+					
 				}
 			
 			})	
@@ -168,7 +181,8 @@ app.controller('mainController',function($http,$scope,toaster){
 			$http.get('/api/byavgspawn_gte/'+this.parname).then(function(data){
 				if(data.data.message==undefined)
 				{
-					appl.pokemonlist=data.data;		
+					appl.pokemonlist=data.data;
+					appl.pokemon=true;		
 				}
 				else
 				{
@@ -182,6 +196,7 @@ app.controller('mainController',function($http,$scope,toaster){
 				if(data.data.message==undefined)
 				{
 					appl.pokemonlist=data.data;
+					appl.pokemon=true;
 				}
 				else
 				{
