@@ -21,10 +21,6 @@ module.exports=function(router)
 		res.json(pokedex);
 	});
 
-	router.get('/byid/:id',function(req,res){
-		res.json(pokedex[req.params.id-1]);
-	});
-
 	router.get('/byname/:name',function(req,res){
 		var flag=false;
 		for(let i=0;i<pokedex.length;i++)

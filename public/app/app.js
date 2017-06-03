@@ -52,19 +52,91 @@ app.controller('mainController',function($http,$scope,toaster){
 			appl.spawnchance=false;
 		}
 	}
-	console.log("angular working");
-	appl.listPokemon=function(parname){
+	appl.searchbyname=function(parname){
 		if(this.parname===undefined)
 		{
 			appl.pokemonlist="please enter some string";
-			toaster.pop('warning','Please enter some input');
+			toaster.pop('error','Please enter some input');
 		}
 		else
 		{
-			$http.get('/api/byname/'+this.name).then(function(data){
+			$http.get('/api/byname/'+this.parname).then(function(data){
 			appl.pokemonlist=data.data;
 		})	
 		}
 		
 	}
+
+
+	appl.searchbytype=function(parname){
+		if(this.parname===undefined)
+		{
+			appl.pokemonlist="please enter some string";
+			toaster.pop('error','Please enter some input');
+		}
+		else
+		{
+			$http.get('/api/bytype/'+this.parname).then(function(data){
+			appl.pokemonlist=data.data;
+		})	
+		}
+		
+	}
+	appl.searchbyweak=function(parname){
+		if(this.parname===undefined)
+		{
+			appl.pokemonlist="please enter some string";
+			toaster.pop('error','Please enter some input');
+		}
+		else
+		{
+			$http.get('/api/byweakness/'+this.parname).then(function(data){
+			appl.pokemonlist=data.data;
+		})	
+		}
+		
+	}
+	appl.searchbyspawnchance=function(parname,a){
+		if(this.parname===undefined)
+		{
+			appl.pokemonlist="please enter some string";
+			toaster.pop('error','Please enter some input');
+		}
+		else if(a=='lte')
+		{
+			$http.get('/api/byspawnchance_lte/'+this.parname).then(function(data){
+			appl.pokemonlist=data.data;
+		})	
+		}
+		else
+		{
+			$http.get('/api/byspawnchance_gte/'+this.parname).then(function(data){
+			appl.pokemonlist=data.data;
+			})	
+		}
+		
+	}
+
+	appl.searchbyavgspawn=function(parname){
+		if(this.parname===undefined)
+		{
+			appl.pokemonlist="please enter some string";
+			toaster.pop('error','Please enter some input');
+		}
+		else if(a=='gte') 
+		{
+			$http.get('/api/byavgspawn_gte/'+this.parname).then(function(data){
+			appl.pokemonlist=data.data;
+		})	
+		}
+		else
+		{
+			$http.get('/api/byavgspawn_lte/'+this.parname).then(function(data){
+			appl.pokemonlist=data.data;
+			})	
+		}
+		
+	}
+
+	
 })

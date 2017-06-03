@@ -58,14 +58,9 @@
         <!-- /.container-fluid -->
     </nav>
 
-    <br>
-    <br>
-
-
     <div class="jumbotron text-center">
         <h1>Welcome to Pokedex.</h1>
         <p>Here you can get information about pokemons.</p>
-        <br>
         <br>
         <div class="text-center container">
 
@@ -92,20 +87,80 @@
 
     </div>
     <div class="container">
-       <div ng-show="main.name">
-            <form role="form"  ng-submit="main.listPokemon(parname)">
-              <div class="form-group">
+       <div ng-if="main.name">
+            <form role="form"  ng-submit="main.searchbyname(parname)">
+              <div class="input-group">
                 <input type="text" class="form-control" placeholder="Enter pokemon name " ng-model="main.parname">
+                <span class="input-group-btn">
+                    <button type="submit" class="btn btn-primary btn-block">
+                    <span class="glyphicon glyphicon-search"></span>
+                    </button>    
+                </span>
               </div>
-                <button type="submit" class="btn btn-primary btn-block"><span class="glyphicon glyphicon-search"></span></button>
+                
+            </form>
+       </div>
+       <div ng-if="main.typ">
+            <form role="form"  ng-submit="main.searchbytype(parname)">
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Enter pokemon type " ng-model="main.parname">
+                <span class="input-group-btn">
+                    <button type="submit" class="btn btn-success btn-block">
+                    <span class="glyphicon glyphicon-search"></span>
+                    </button>
+                </span>
+              </div>
+                
+            </form>
+       </div>
+       <div ng-if="main.weak">
+            <form role="form"  ng-submit="main.seachbyweak(parname)">
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Enter weakness " ng-model="main.parname">
+                <span class="input-group-btn">
+                    <button type="submit" class="btn btn-danger ">
+                    <span class="glyphicon glyphicon-search"></span>
+                    </button>    
+                </span>
+              </div>
+                
+            </form>
+       </div>
+       <div ng-if="main.spawnchance">
+            <form role="form">
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Enter spawn chance " ng-model="main.parname">
+                <span class="input-group-btn">
+                    <button ng-click="main.searchbyspawnchance(parname,'lte')" class="btn btn-info btn-default" data-toggle="tooltip" title="Less than equalto">
+                       <= 
+                    </button>
+                    <button ng-click="main.searchbyspawnchance(parname,'gte')" class="btn btn-info" data-toggle="tooltip" title="Greater than equalto">
+                        >=
+                    </button>
+                </span>
+              </div>
+                
+            </form>
+       </div>
+       <div ng-if="main.spawnavg">
+            <form role="form">
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Enter avg spawns " ng-model="main.parname">
+                <span class="input-group-btn"> 
+                    <button ng-click="main.avgspawn(parname,'lte')" class="btn btn-warning" data-toggle="tooltip" title="Less than equalto">
+                        <=
+                    </button>
+                    <button ng-click="main.avgspawn(parname,'gte')" type="submit" class="btn btn-warning btn-default" data-toggle="tooltip" title="Greater than equal to">
+                        >=
+                    </button>
+                </span>
+              </div>
+                
             </form>
        </div>
         <br>
         <br>
-        <div class="row" ng-show=main.pokemonlist >
-        <div ng-show=main.pokemonlist.message>
-            {{main.pokemonlist.message}}
-        </div>
+        <div class="row" ng-show=main.pokemonlist>
         <div class="col-md-4" ng-show=main.pokemonlist.name>
             <label>Name:</label> {{main.pokemonlist.name}}
             <br>
