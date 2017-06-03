@@ -10,6 +10,7 @@ app.controller('mainController',function($http,$scope,toaster){
 	appl.spawnavg=false;
 	appl.pokemonlist={};
 	appl.pokemon=false;
+	appl.pokemonname=false;
 	appl.activate=function(a)
 	{
 		if(a=='name')
@@ -24,6 +25,7 @@ app.controller('mainController',function($http,$scope,toaster){
 		}
 		else if(a=='typ')
 		{
+			appl.pokemonname=false;
 			appl.typ=true;
 			appl.parname="";
 			appl.name=false;
@@ -34,6 +36,7 @@ app.controller('mainController',function($http,$scope,toaster){
 		else if(a=='weak')
 		{
 			appl.weak=true;
+			appl.pokemonname=false;
 			appl.parname="";
 			appl.name=false;
 			appl.typ=false;
@@ -43,6 +46,7 @@ app.controller('mainController',function($http,$scope,toaster){
 		else if(a=='spawnchance')
 		{
 			appl.spawnchance=true;
+			appl.pokemonname=false;
 			appl.parname="";
 			appl.name=false;
 			appl.typ=false;
@@ -52,6 +56,7 @@ app.controller('mainController',function($http,$scope,toaster){
 		else if(a=='spawnavg')
 		{
 			appl.spawnavg=true;
+			appl.pokemonname=false;
 			appl.name=false;
 			appl.parname="";
 			appl.typ=false;
@@ -60,8 +65,8 @@ app.controller('mainController',function($http,$scope,toaster){
 		}
 	}
 	appl.searchbyname=function(parname){
-
-		if(this.parname===undefined)
+		console.log(this.parname);
+		if(this.parname=="")
 		{
 			toaster.pop('error','Please enter some input');
 		}
@@ -72,6 +77,7 @@ app.controller('mainController',function($http,$scope,toaster){
 			{
 
 				appl.pokemonlist.byname=data.data;
+				appl.pokemonname=true;
 				
 			}
 			else
@@ -85,7 +91,7 @@ app.controller('mainController',function($http,$scope,toaster){
 
 
 	appl.searchbytype=function(parname){
-		if(this.parname===undefined)
+		if(this.parname=="")
 		{
 			appl.pokemonlist="please enter some string";
 			toaster.pop('error','Please enter some input');
@@ -108,7 +114,7 @@ app.controller('mainController',function($http,$scope,toaster){
 		
 	}
 	appl.searchbyweak=function(parname){
-		if(this.parname===undefined)
+		if(this.parname=="")
 		{
 			appl.pokemonlist="please enter some string";
 			toaster.pop('error','Please enter some input');
@@ -130,7 +136,7 @@ app.controller('mainController',function($http,$scope,toaster){
 		
 	}
 	appl.searchbyspawnchance=function(parname,a){
-		if(this.parname===undefined)
+		if(this.parname=="")
 		{
 			appl.pokemonlist="please enter some string";
 			toaster.pop('error','Please enter some input');
@@ -170,7 +176,7 @@ app.controller('mainController',function($http,$scope,toaster){
 	}
 
 	appl.searchbyavgspawn=function(parname,a){
-		if(this.parname===undefined)
+		if(this.parname=="")
 		{
 			appl.pokemonlist="please enter some string";
 			toaster.pop('error','Please enter some input');
