@@ -1,0 +1,27 @@
+{
+  "name": "pokedex",
+  "version": "1.0.0",
+  "description": "dashboard for displaying pokemons information",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sachdevnitin19/Pokedex.git"
+  },
+  "author": "sachdevnitin19",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sachdevnitin19/Pokedex/issues"
+  },
+  "homepage": "https://github.com/sachdevnitin19/Pokedex#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "mongoose": "^4.10.4",
+    "morgan": "^1.8.2",
+    "request": "^2.81.0"
+  }
+}
