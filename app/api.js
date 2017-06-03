@@ -143,7 +143,7 @@ module.exports=function(router)
 		}
 		else
 		{
-			res.json({"message":"no pokemon found with average spawn  >= '"+req.params.spawnchance_gte+"'."});
+			res.json({"message":"no pokemon found with average spawn  >= '"+req.params.avgspawn_gte+"'."});
 		}
 		
 	});

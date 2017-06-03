@@ -14,22 +14,9 @@
 
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 
-    <!--<link rel="shortcut icon" href="./app/views/favicon.ico" >-->
+    <link rel="shortcut icon" href="./favicon.ico" >
     
-    
-     <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-  crossorigin="anonymous"></script>
-     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
-     
-
-   <!-- <script src="lib/js/angular.min.js"></script>-->
-   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
-
     <link href="https://cdnjs.cloudflare.com/ajax/libs/angularjs-toaster/1.1.0/toaster.min.css" rel="stylesheet" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angularjs-toaster/1.1.0/toaster.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="./style.css">
-    
   </head>
 
 
@@ -114,7 +101,7 @@
             </form>
        </div>
        <div ng-if="main.weak">
-            <form role="form"  ng-submit="main.seachbyweak(parname)">
+            <form role="form"  ng-submit="main.searchbyweak(parname)">
               <div class="input-group">
                 <input type="text" class="form-control" placeholder="Enter weakness..eg:- poison" ng-model="main.parname">
                 <span class="input-group-btn">
@@ -147,10 +134,10 @@
               <div class="input-group">
                 <input type="text" class="form-control" placeholder="Enter avg spawns " ng-model="main.parname">
                 <span class="input-group-btn"> 
-                    <button ng-click="main.avgspawn(parname,'lte')" class="btn btn-warning" data-toggle="tooltip" title="Less than equalto">
+                    <button ng-click="main.searchbyavgspawn(parname,'lte')" class="btn btn-warning" data-toggle="tooltip" title="Less than equalto">
                         <=
                     </button>
-                    <button ng-click="main.avgspawn(parname,'gte')" type="submit" class="btn btn-warning btn-default" data-toggle="tooltip" title="Greater than equal to">
+                    <button ng-click="main.searchbyavgspawn(parname,'gte')" type="submit" class="btn btn-warning btn-default" data-toggle="tooltip" title="Greater than equal to">
                         >=
                     </button>
                 </span>
@@ -160,33 +147,98 @@
        </div>
         <br>
         <br>
-        <div class="row" ng-show=main.pokemonlist>
-        <div class="col-md-4" ng-show=main.pokemonlist.name>
-            <label>Name:</label> {{main.pokemonlist.name}}
-            <br>
-            <label>Height:</label>{{main.pokemonlist.height}}
-            <br>
-            <label>Weight:</label>{{main.pokemonlist.weight}}
-            <br>
-            <label>Type:</label>{{main.pokemonlist.type}}
+        
+            <div class="panel panel-primary" ng-if=main.pokemonlist.byname>
+            
+            <div class="panel-heading text-center">
+                <span class="lead">{{main.pokemonlist.byname.name}}</span>
+            </div>
+
+            <div class="panel-body">
+            <div class="text-center lead">
+                <label>Type:</label><span ng-repeat="i in main.pokemonlist.byname.type">{{i}} </span>    
+            </div>
+            
+                <div class="row" >
+                <div class="col-md-4" ng-if=main.pokemonlist.byname>
+                    
+                    <label>Height:</label> {{main.pokemonlist.byname.height}}
+                    <br>
+                    <label>Weight:</label> {{main.pokemonlist.byname.weight}}
+                    <br>
+                    
+                </div>
+                <div class="col-md-4" ng-show=main.pokemonlist.byname>
+                    <label>Weaknesses:</label><span ng-repeat="i in main.pokemonlist.byname.weaknesses"> {{i}} </span>
+                    <br>
+                    <label>candy count:</label> {{main.pokemonlist.byname.candy_count}}
+                </div>
+                <div class="col-md-4" ng-show=main.pokemonlist.byname>
+                    <img ng-show=main.pokemonlist.byname.img src={{main.pokemonlist.byname.img}} width="150" height="150" class="img">
+                </div>
+                </div>
+            </div>
         </div>
-        <div class="col-md-4" ng-show=main.pokemonlist.name>
-            <label>Weaknesses:</label>{{main.pokemonlist.weaknesses}}
-            <br>
-            <label>candy count:</label>{{main.pokemonlist.candy_count}}
-        </div>
-        <div class="col-md-4" ng-show=main.pokemonlist.name>
-            <img ng-show=main.pokemonlist.img src={{main.pokemonlist.img}} width="150" height="150" class="img">
-        </div>
+
+        <div class="panel panel-success" ng-if=main.pokemonlist>
+            <div class="panel-heading text-center">
+                Pokemon List
+            </div>
+            <div class="panel-body">
+                <div style="border-width:1px !important; border-style:solid !important; border-color:#D9EDF7 !important; border-radius:16px !important;" ng-repeat="i in main.pokemonlist">
+                    <div class="text-center">
+                        <span class="lead">{{i.name}}</span>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-4" >
+                        <div style="padding-left:5px !important;">
+                        <label>Type:</label><span ng-repeat="j in i.type"> {{j}} </span>
+                        <br>
+                        <label>Weaknesses:</label><span ng-repeat="j in i.weaknesses"> {{j}} </span>
+                        <br>
+                        <label>Height:</label> {{i.height}}
+                        <br>
+                        <label>Weight:</label> {{i.weight}}
+                        <br>    
+                        </div>
+                        </div>
+                        <div class="col-md-4" >
+                            <label>Egg:</label>{{i.egg}}
+                            <br>
+                            <label>candy count:</label> {{i.candy_count}}
+                            <br>
+                            <label>Spawn Chance:</label>{{i.spawn_chance}}
+                            <br>
+                            <label>Avg spawn:</label>{{i.avg_spawns}}
+                            <br>
+                            <label>Spawn time:</label>{{i.spawn_time}}
+                        </div>
+                        <div class="col-md-4" >
+                            <img  src={{i.img}} width="150" height="150" class="img">
+                        </div>    
+                    </div>
+                    
+
+                </div>
+            </div>
         </div>
         
+        
+        
+        
     </div>
+
     <toaster-container toaster-options="{'time-out':4000,'close-button':true}"></toaster-container>
     <!-- Plugin JavaScript -->
-    
-    <!--<script type="text/javascript" src="./lib/js/scrollreveal.min.js"></script>-->
-    <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-route.min.js"></script>-->
+
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+     
+     
+   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angularjs-toaster/1.1.0/toaster.min.js"></script>
     <script src="app/app.js"></script>
-    <!--<script src="app/routes.js"></script>-->
 </body>
 </html>
