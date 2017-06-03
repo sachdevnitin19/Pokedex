@@ -19,7 +19,7 @@ app.use('/api',appRoutes);
 
 
 app.get('*',function(req,res){
-	res.sendFile(path.join(__dirname+'/public/app/views/index.html'));
+	res.sendFile(path.join(__dirname+'/public/index.html'));
 });
 app.listen(port,function(){
 	console.log("listening on port:"+port);

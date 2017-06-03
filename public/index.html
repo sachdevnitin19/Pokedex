@@ -1,0 +1,137 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <base href="/">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Pokedex</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+    <!--<link rel="shortcut icon" href="./app/views/favicon.ico" >-->
+    
+    
+     <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+     
+
+   <!-- <script src="lib/js/angular.min.js"></script>-->
+   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/angularjs-toaster/1.1.0/toaster.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angularjs-toaster/1.1.0/toaster.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="./style.css">
+    
+  </head>
+
+
+  <body id="page-top" ng-app="pokedex" ng-controller="mainController as main" ng-cloak >
+
+    
+    
+    <nav id="mainNav" class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand page-scroll" href="/">Pokedex</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                   
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+    <br>
+    <br>
+
+
+    <div class="jumbotron text-center">
+        <h1>Welcome to Pokedex.</h1>
+        <p>Here you can get information about pokemons.</p>
+        <br>
+        <br>
+        <div class="text-center container">
+
+            <h2>Search by..</h2>
+            <div class="row">
+            <div class="col-md-3">
+                <button class="btn btn-block btn-primary" ng-click="main.activate('name')">Name.</button>
+            </div>
+            <div class="col-md-3">
+               <button class="btn btn-block btn-success" ng-click="main.activate('typ')">Type.</button>
+            </div>
+            <div class="col-md-2">
+               <button class="btn btn-block btn-danger" ng-click="main.activate('weak')">Weaknesses.</button> 
+            </div>
+            <div class="col-md-2">
+                <button class="btn btn-block btn-info" ng-click="main.activate('spawnchance')">Spawn Chances.</button>
+            </div>
+            <div class="col-md-2">
+                <button class="btn btn-block btn-warning" ng-click="main.activate('spawnavg')">Avg Spawns.</button>
+            </div>
+        </div>    
+        </div>
+        
+
+    </div>
+    <div class="container">
+       <div ng-show="main.name">
+            <form role="form"  ng-submit="main.listPokemon(parname)">
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Enter pokemon name " ng-model="main.parname">
+              </div>
+                <button type="submit" class="btn btn-primary btn-block"><span class="glyphicon glyphicon-search"></span></button>
+            </form>
+       </div>
+        <br>
+        <br>
+        <div class="row" ng-show=main.pokemonlist >
+        <div ng-show=main.pokemonlist.message>
+            {{main.pokemonlist.message}}
+        </div>
+        <div class="col-md-4" ng-show=main.pokemonlist.name>
+            <label>Name:</label> {{main.pokemonlist.name}}
+            <br>
+            <label>Height:</label>{{main.pokemonlist.height}}
+            <br>
+            <label>Weight:</label>{{main.pokemonlist.weight}}
+            <br>
+            <label>Type:</label>{{main.pokemonlist.type}}
+        </div>
+        <div class="col-md-4" ng-show=main.pokemonlist.name>
+            <label>Weaknesses:</label>{{main.pokemonlist.weaknesses}}
+            <br>
+            <label>candy count:</label>{{main.pokemonlist.candy_count}}
+        </div>
+        <div class="col-md-4" ng-show=main.pokemonlist.name>
+            <img ng-show=main.pokemonlist.img src={{main.pokemonlist.img}} width="150" height="150" class="img">
+        </div>
+        </div>
+        
+    </div>
+    <toaster-container toaster-options="{'time-out':4000,'close-button':true}"></toaster-container>
+    <!-- Plugin JavaScript -->
+    
+    <!--<script type="text/javascript" src="./lib/js/scrollreveal.min.js"></script>-->
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-route.min.js"></script>-->
+    <script src="app/app.js"></script>
+    <!--<script src="app/routes.js"></script>-->
+</body>
+</html>
