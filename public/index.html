@@ -67,19 +67,19 @@
             <h2>Search by..</h2>
             <div class="row">
             <div class="col-md-3">
-                <button class="btn btn-block btn-primary" ng-click="main.activate('name')">Name.</button>
+                <button class="btn btn-block btn-primary" ng-click="main.activate('name')">Name</button>
             </div>
             <div class="col-md-3">
-               <button class="btn btn-block btn-success" ng-click="main.activate('typ')">Type.</button>
+               <button class="btn btn-block btn-success" ng-click="main.activate('typ')">Type</button>
             </div>
             <div class="col-md-2">
-               <button class="btn btn-block btn-danger" ng-click="main.activate('weak')">Weaknesses.</button> 
+               <button class="btn btn-block btn-danger" ng-click="main.activate('weak')">Weaknesses</button> 
             </div>
             <div class="col-md-2">
-                <button class="btn btn-block btn-info" ng-click="main.activate('spawnchance')">Spawn Chances.</button>
+                <button class="btn btn-block btn-info" ng-click="main.activate('spawnchance')">Spawn Chances</button>
             </div>
             <div class="col-md-2">
-                <button class="btn btn-block btn-warning" ng-click="main.activate('spawnavg')">Avg Spawns.</button>
+                <button class="btn btn-block btn-warning" ng-click="main.activate('spawnavg')">Avg Spawns</button>
             </div>
         </div>    
         </div>
@@ -103,7 +103,7 @@
        <div ng-if="main.typ">
             <form role="form"  ng-submit="main.searchbytype(parname)">
               <div class="input-group">
-                <input type="text" class="form-control" placeholder="Enter pokemon type " ng-model="main.parname">
+                <input type="text" class="form-control" placeholder="Enter pokemon type... eg:- grass " ng-model="main.parname">
                 <span class="input-group-btn">
                     <button type="submit" class="btn btn-success btn-block">
                     <span class="glyphicon glyphicon-search"></span>
@@ -116,7 +116,7 @@
        <div ng-if="main.weak">
             <form role="form"  ng-submit="main.seachbyweak(parname)">
               <div class="input-group">
-                <input type="text" class="form-control" placeholder="Enter weakness " ng-model="main.parname">
+                <input type="text" class="form-control" placeholder="Enter weakness..eg:- poison" ng-model="main.parname">
                 <span class="input-group-btn">
                     <button type="submit" class="btn btn-danger ">
                     <span class="glyphicon glyphicon-search"></span>
@@ -131,7 +131,7 @@
               <div class="input-group">
                 <input type="text" class="form-control" placeholder="Enter spawn chance " ng-model="main.parname">
                 <span class="input-group-btn">
-                    <button ng-click="main.searchbyspawnchance(parname,'lte')" class="btn btn-info btn-default" data-toggle="tooltip" title="Less than equalto">
+                    <button ng-click="main.searchbyspawnchance(parname,'lte')" class="btn btn-info" data-toggle="tooltip" title="Less than equalto">
                        <= 
                     </button>
                     <button ng-click="main.searchbyspawnchance(parname,'gte')" class="btn btn-info" data-toggle="tooltip" title="Greater than equalto">
