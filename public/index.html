@@ -17,6 +17,16 @@
     <link rel="shortcut icon" href="./favicon.ico" >
     
     <link href="https://cdnjs.cloudflare.com/ajax/libs/angularjs-toaster/1.1.0/toaster.min.css" rel="stylesheet" />
+    <style>  
+           li{  
+                cursor:pointer;  
+           }  
+           li:hover  
+           {  
+                background-color:#9E9E9E;
+                color:white;  
+           }  
+   </style>  
   </head>
 
 
@@ -77,14 +87,18 @@
        <div ng-if="main.name">
             <form role="form"  ng-submit="main.searchbyname(parname)">
               <div class="input-group">
-                <input type="text" class="form-control" placeholder="Enter pokemon name " ng-model="main.parname">
+                <input type="text" class="form-control" ng-keyup="main.comp(main.parname)" placeholder="Enter pokemon name " ng-model="main.parname">
                 <span class="input-group-btn">
                     <button type="submit" class="btn btn-primary btn-block">
                     <span class="glyphicon glyphicon-search"></span>
                     </button>    
                 </span>
-              </div>
+                <br>
                 
+              </div>
+                <ul class="list-group" ng-model="main.hidethis" ng-hide="main.hidethis">  
+                          <li class="list-group-item" ng-repeat="i in main.out" ng-click="main.parfun(i.name)">{{i.name}}</li>  
+                     </ul> 
             </form>
        </div>
        <div ng-if="main.typ">

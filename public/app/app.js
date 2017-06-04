@@ -14,6 +14,32 @@ app.controller('mainController',function($http,$scope,toaster){
 	appl.pokemon=false;					//this to hide the body 
 	appl.pokemonname=false;				//in which result is displayed when no input
 	
+	appl.autolist=[];
+	$http.get('/api/poke').then(function(data)
+	{
+		appl.autolist=data.data;
+	});
+	appl.comp=function(p)
+	{
+		appl.hidethis=false;
+		var output=[];
+		angular.forEach(appl.autolist,function(pok){
+			
+			if(pok.name.toLowerCase().indexOf(p.toLowerCase())>=0)
+			{
+				output.push(pok);
+				//console.log(output);
+			}
+		})
+		appl.out=output;
+	}
+	appl.parfun=function(ab)
+	{
+		console.log(ab);
+		appl.parname=ab;
+		appl.searchbyname(appl.parname);
+		appl.hidethis=true;
+	}
 	//function triggers the display of different search boxes.
 	appl.activate=function(a)			
 	{
